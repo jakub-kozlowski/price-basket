@@ -8,4 +8,5 @@ import java.util.List;
 public interface Offer {
     boolean doesApply(List<Item> items);
     BigDecimal getDiscount(List<Item> items);
+    String getName();
 }

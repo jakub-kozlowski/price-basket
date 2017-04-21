@@ -29,14 +29,14 @@ public class BasketPriceTest {
 
     @Test
     public void whenNoItems_BasketTotalIsZero() {
-        unit = new BasketPrice(Collections.emptyList(), itemPricing);
+        unit = new BasketPrice(Collections.emptyList(), itemPricing, offers);
 
         assertThat(unit.getTotal(), is(BigDecimal.ZERO));
     }
 
     @Test
     public void whenNoOffers_BasketTotalIsSameAsSubtotal() {
-        unit = new BasketPrice(Arrays.asList(Item.APPLES, Item.BREAD, Item.MILK, Item.SOUP), itemPricing);
+        unit = new BasketPrice(Arrays.asList(Item.APPLES, Item.BREAD, Item.MILK, Item.SOUP), itemPricing, offers);
 
         assertThat(unit.getTotal(), is(not(BigDecimal.ZERO)));
         assertThat(unit.getTotal(), is(unit.getSubTotal()));
@@ -45,7 +45,7 @@ public class BasketPriceTest {
     @Test
     public void whenAppleOffer_ApplesHaveDiscount() {
         offers = Collections.singletonList(new ApplesOffer(itemPricing));
-        unit = new BasketPrice(Collections.singletonList(Item.APPLES), itemPricing);
+        unit = new BasketPrice(Collections.singletonList(Item.APPLES), itemPricing, offers);
 
         assertThat(unit.getTotal(), is(not(BigDecimal.ZERO)));
         assertThat(unit.getSubTotal(), is(itemPricing.getPrice(Item.APPLES)));

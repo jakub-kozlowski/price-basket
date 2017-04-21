@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -32,11 +33,12 @@ public class ApplesOfferTest {
     }
 
     @Test
-    public void appleOffer_isPercentageDiscount() {
-        BigDecimal discount = unit.getDiscount(Arrays.asList(Item.APPLES, Item.APPLES));
+    public void appleOffer_isAPercentageDiscount() {
+        List<Item> basket = Arrays.asList(Item.APPLES, Item.APPLES);
+        BigDecimal discount = unit.getDiscount(basket);
         assertThat(discount, is(ApplesOffer.PERCENTAGE_DISCOUNT
                 .multiply(itemPricing.getPrice(Item.APPLES)
-                .multiply(new BigDecimal(2)
+                .multiply(new BigDecimal(basket.size())
                 ))));
     }
 }

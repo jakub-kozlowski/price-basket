@@ -24,4 +24,9 @@ public class ApplesOffer implements Offer {
     public BigDecimal getDiscount(List<Item> items) {
         return discountPerItem.multiply(new BigDecimal(items.stream().filter(discountedItem::equals).count()));
     }
+
+    @Override
+    public String getName() {
+        return "Apples 10% off";
+    }
 }
